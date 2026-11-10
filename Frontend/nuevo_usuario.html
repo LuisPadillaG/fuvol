@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUVOL - Nuevo Usuario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #08121a;
+            background-image: url('../img/fuvol.jpg'), url('../img/images.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 18% 45%, rgba(18, 56, 84, 0.42) 0%, rgba(8, 13, 19, 0.90) 52%, rgba(4, 5, 8, 0.98) 100%),
+                linear-gradient(90deg, rgba(8, 20, 30, 0.60) 0%, rgba(6, 9, 13, 0.92) 45%, rgba(4, 4, 6, 0.98) 100%);
+            pointer-events: none;
+        }
+
+        .top-nav-link {
+            position: fixed;
+            top: 22px;
+            right: 38px;
+            z-index: 100;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.45rem;
+            letter-spacing: 0.04em;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 4px 10px;
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .top-nav-link:hover {
+            transform: translateY(-2px);
+            color: #ff6e59;
+        }
+
+        .app-layout {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+            width: 100%;
+            max-width: 1480px;
+            margin: 0 auto;
+        }
+
+        .sidebar-menu {
+            width: 350px;
+            min-height: 100vh;
+            padding: 64px 20px 64px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .menu-group {
+            display: flex;
+            flex-direction: column;
+            gap: 38px;
+        }
+
+        .menu-link {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.1rem;
+            letter-spacing: 0.02em;
+            line-height: 1;
+            text-decoration: none;
+            width: fit-content;
+            opacity: 0;
+            animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+        }
+
+        .menu-link:hover {
+            transform: translateX(10px) scale(1.04);
+            filter: brightness(1.3);
+        }
+
+        .color-green { color: #147a58; animation-delay: 0.08s; }
+        .color-coral { color: #ff6e59; animation-delay: 0.16s; margin-left: 24px; }
+        .color-blue { color: #1e287a; animation-delay: 0.24s; margin-left: 24px; }
+        .color-purple { color: #5b1873; animation-delay: 0.32s; }
+
+        .brand-container {
+            margin: auto 0;
+            padding: 20px 0 20px 10px;
+            opacity: 0;
+            animation: slideInLeft 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.14s forwards;
+        }
+
+        .giant-menu-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4.8rem, 7.8vw, 7.6rem);
+            font-weight: 400;
+            line-height: 0.88;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        .register-panel {
+            flex: 1;
+            padding: 44px 42px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.3rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .register-card {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            background-color: rgba(14, 14, 16, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            padding: 34px 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.72);
+            opacity: 0;
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        .card-watermark-bg {
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(1.6);
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .register-form {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.32rem;
+            letter-spacing: 0.04em;
+            color: #e5e7eb;
+        }
+
+        .field-input {
+            height: 46px;
+            padding: 0 16px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            outline: none;
+            transition: border-color 0.25s ease, background-color 0.25s ease;
+        }
+
+        .field-input:focus {
+            border-color: #ff6e59;
+            background-color: rgba(255, 255, 255, 0.09);
+        }
+
+        .carousel-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .carousel-controls-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .carousel-arrow-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .carousel-arrow-btn:hover {
+            transform: scale(1.1);
+            background-color: #ff6e59;
+        }
+
+        .carousel-arrow-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .carousel-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 132px;
+        }
+
+        .carousel-team-logo {
+            width: 92px;
+            height: 92px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
+            transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+        }
+
+        .carousel-team-logo.pop-anim {
+            transform: scale(0.84);
+            opacity: 0.4;
+        }
+
+        .carousel-team-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.7rem;
+            letter-spacing: 0.03em;
+            color: #ffffff;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .carousel-dot.active {
+            background: #ff6e59;
+            transform: scale(1.25);
+        }
+
+        .submit-btn {
+            margin-top: 6px;
+            height: 52px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6e59;
+            color: #ffffff;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.65rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(255, 110, 89, 0.35);
+            transition: transform 0.22s ease, background-color 0.22s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff563f;
+            transform: translateY(-2px);
+        }
+
+        .status-msg {
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-align: center;
+            min-height: 20px;
+            color: #ff6e59;
+        }
+
+        .status-msg.success {
+            color: #17d875;
+        }
+
+        .auth-footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .auth-footer-links a {
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .auth-footer-links a:hover {
+            color: #ff6e59;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .app-layout { flex-direction: column; }
+            .sidebar-menu { width: 100%; min-height: auto; padding: 28px 24px; gap: 16px; }
+            .menu-group { flex-direction: row; flex-wrap: wrap; gap: 20px; }
+            .color-coral, .color-blue { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="iniciar_sesion.html" class="top-nav-link">INICIAR SESIÓN</a>
+
+    <div class="app-layout">
+        <aside class="sidebar-menu">
+            <div class="menu-group">
+                <a href="index.html" class="menu-link color-green">PARTIDOS HOY</a>
+                <a href="iniciar_sesion.html" class="menu-link color-coral">INICIAR SESIÓN</a>
+            </div>
+
+            <div class="brand-container">
+                <a href="index.html" class="giant-menu-title">FUVOL</a>
+            </div>
+
+            <div class="menu-group">
+                <a href="usuario.html" class="menu-link color-blue">MI PERFIL</a>
+                <a href="index.html" class="menu-link color-purple">VOLVER AL INICIO</a>
+            </div>
+        </aside>
+
+        <main class="register-panel">
+            <h2 class="register-heading">CREAR NUEVO USUARIO</h2>
+
+            <section class="register-card">
+                <img id="watermarkTeamImg" src="https://media.api-sports.io/football/teams/541.png" alt="" class="card-watermark-bg">
+
+                <form id="registerForm" class="register-form">
+                    <div class="field-group">
+                        <label for="inputUsuario" class="field-label">CREA TU NOMBRE DE USUARIO</label>
+                        <input type="text" id="inputUsuario" class="field-input" placeholder="Ej. LuisFuvol" required autocomplete="username">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="inputPassword" class="field-label">CREA TU CONTRASEÑA</label>
+                        <input type="password" id="inputPassword" class="field-input" placeholder="Escribe tu contraseña" required autocomplete="new-password">
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">SELECCIONA TU EQUIPO FAVORITO</label>
+                        <div class="carousel-box">
+                            <div class="carousel-controls-row">
+                                <button type="button" class="carousel-arrow-btn" onclick="changeTeamSlide(-1)" title="Equipo anterior">
+                                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                                </button>
+
+                                <div class="carousel-stage">
+                                    <img id="carouselTeamLogo" src="" alt="Logo Equipo" class="carousel-team-logo">
+                                    <span id="carouselTeamName" class="carousel-team-name"></span>
+                                </div>
+
+                                <button type="button" class="carousel-arrow-btn" onclick="changeTeamSlide(1)" title="Siguiente equipo">
+                                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                                </button>
+                            </div>
+
+                            <div id="carouselDots" class="carousel-dots"></div>
+                        </div>
+                    </div>
+
+                    <div id="statusMessage" class="status-msg"></div>
+
+                    <button type="submit" class="submit-btn">REGISTRAR USUARIO</button>
+
+                    <div class="auth-footer-links">
+                        <span>¿Ya tienes una cuenta?</span>
+                        <a href="iniciar_sesion.html">IR A INICIAR SESIÓN →</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const PHP_ENDPOINT = 'usuarios.php';
+
+        // 3 Equipos hardcodeados con su logo oficial para el carrusel
+        const EQUIPOS_CARRUSEL = [
+            {
+                nombre: 'Real Madrid CF',
+                logo: 'https://media.api-sports.io/football/teams/541.png'
+            },
+            {
+                nombre: 'FC Barcelona',
+                logo: 'https://media.api-sports.io/football/teams/529.png'
+            },
+            {
+                nombre: 'Club América',
+                logo: 'https://media.api-sports.io/football/teams/2287.png'
+            }
+        ];
+
+        let currentTeamIndex = 0;
+
+        function renderCarousel() {
+            const team = EQUIPOS_CARRUSEL[currentTeamIndex];
+            const logoEl = document.getElementById('carouselTeamLogo');
+            const nameEl = document.getElementById('carouselTeamName');
+            const watermarkEl = document.getElementById('watermarkTeamImg');
+            const dotsEl = document.getElementById('carouselDots');
+
+            logoEl.classList.add('pop-anim');
+            setTimeout(() => {
+                logoEl.src = team.logo;
+                nameEl.textContent = team.nombre;
+                watermarkEl.src = team.logo;
+                logoEl.classList.remove('pop-anim');
+            }, 130);
+
+            dotsEl.innerHTML = EQUIPOS_CARRUSEL.map((_, idx) => `
+                <span class="carousel-dot ${idx === currentTeamIndex ? 'active' : ''}" onclick="selectTeamSlide(${idx})"></span>
+            `).join('');
+        }
+
+        function changeTeamSlide(direction) {
+            const total = EQUIPOS_CARRUSEL.length;
+            currentTeamIndex = (currentTeamIndex + direction + total) % total;
+            renderCarousel();
+        }
+
+        function selectTeamSlide(index) {
+            currentTeamIndex = index;
+            renderCarousel();
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const usuario = document.getElementById('inputUsuario').value.trim();
+            const password = document.getElementById('inputPassword').value;
+            const equipo_favorito = EQUIPOS_CARRUSEL[currentTeamIndex].nombre;
+            const statusEl = document.getElementById('statusMessage');
+
+            statusEl.className = 'status-msg';
+            statusEl.textContent = 'Registrando usuario en la base de datos fuvol...';
+
+            try {
+                const response = await fetch(`${PHP_ENDPOINT}?accion=registro`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario, password, equipo_favorito })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('fuvol_usuario_activo', JSON.stringify({
+                        usuario,
+                        password,
+                        equipo_favorito
+                    }));
+                    statusEl.className = 'status-msg success';
+                    statusEl.textContent = '¡Cuenta creada con éxito! Redirigiendo a tu perfil...';
+
+                    setTimeout(() => {
+                        window.location.href = 'usuario.html';
+                    }, 600);
+                } else {
+                    statusEl.textContent = data.error || 'No se pudo registrar el usuario.';
+                }
+            } catch (error) {
+                console.error('Error registrando usuario vía PHP:', error);
+                statusEl.textContent = 'Error al conectar con usuarios.php en XAMPP.';
+            }
+        });
+
+        window.onload = renderCarousel;
+    </script>
+</body>
+</html>

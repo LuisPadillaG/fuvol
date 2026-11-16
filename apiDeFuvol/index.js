@@ -1,6 +1,6 @@
 const http = require("node:http");
 const fs = require("node:fs");
-const puerto = 3000;
+const puerto = process.env.PORT || 3000;
 
 var arreglo_musica = new Array();
 

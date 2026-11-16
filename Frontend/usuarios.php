@@ -36,11 +36,30 @@ $accion = isset($_GET['accion']) ? $_GET['accion'] : '';
 $inputJSON = file_get_contents("php://input");
 $datos = json_decode($inputJSON, true);
 
-// 1. OBTENER DATOS DEL USUARIO (GET)
+// 1. OBTENER CATÁLOGO DE ESTADIOS (GET ?accion=estadios)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $accion === 'estadios') {
+    $estadios = [];
+    $resEstadios = $conexion->query("SELECT id, nombre_equipo, link_img, mapa FROM estadio_equipos ORDER BY id ASC");
+    if ($resEstadios) {
+        while ($row = $resEstadios->fetch_assoc()) {
+            $estadios[] = $row;
+        }
+    }
+    echo json_encode($estadios);
+    $conexion->close();
+    exit;
+}
+
+// 2. OBTENER DATOS DEL USUARIO + ESTADIO RELACIONADO (GET ?accion=obtener&usuario=...)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $accion === 'obtener') {
     $user = isset($_GET['usuario']) ? trim($_GET['usuario']) : '';
 
-    $stmt = $conexion->prepare("SELECT usuario, password, equipo_favorito FROM `$tabla` WHERE usuario = ? LIMIT 1");
+    $sql = "SELECT u.usuario, u.password, u.equipo_favorito, e.id AS id_estadio, e.nombre_equipo, e.link_img, e.mapa
+            FROM `$tabla` u
+            LEFT JOIN estadio_equipos e ON u.equipo_favorito = e.nombre_equipo
+            WHERE u.usuario = ? LIMIT 1";
+
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $user);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -56,15 +75,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $accion === 'obtener') {
     exit;
 }
 
-// 2. PETICIONES POST (LOGIN, REGISTRO Y ACTUALIZACIÓN)
+// 3. PETICIONES POST (LOGIN, REGISTRO Y ACTUALIZACIÓN)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = isset($datos['usuario']) ? trim($datos['usuario']) : '';
     $pass = isset($datos['password']) ? $datos['password'] : '';
     $equipo = isset($datos['equipo_favorito']) ? trim($datos['equipo_favorito']) : '';
 
-    // INICIAR SESIÓN
+    // INICIAR SESIÓN (con LEFT JOIN a estadio_equipos)
     if ($accion === 'login') {
-        $stmt = $conexion->prepare("SELECT usuario, password, equipo_favorito FROM `$tabla` WHERE usuario = ? AND password = ? LIMIT 1");
+        $sql = "SELECT u.usuario, u.password, u.equipo_favorito, e.link_img, e.mapa
+                FROM `$tabla` u
+                LEFT JOIN estadio_equipos e ON u.equipo_favorito = e.nombre_equipo
+                WHERE u.usuario = ? AND u.password = ? LIMIT 1";
+
+        $stmt = $conexion->prepare($sql);
         $stmt->bind_param("ss", $user, $pass);
         $stmt->execute();
         $resultado = $stmt->get_result();
@@ -80,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // REGISTRAR NUEVO USUARIO
     elseif ($accion === 'registro') {
-        // Verificar si ya existe el usuario
         $check = $conexion->prepare("SELECT usuario FROM `$tabla` WHERE usuario = ? LIMIT 1");
         $check->bind_param("s", $user);
         $check->execute();
@@ -113,23 +136,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
     }
 
-    // ACTUALIZAR CONTRASEÑA Y EQUIPO FAVORITO
+    // ACTUALIZAR CONTRASEÑA Y EQUIPO FAVORITO + DEVOLVER NUEVO ESTADIO
     elseif ($accion === 'actualizar') {
         $stmt = $conexion->prepare("UPDATE `$tabla` SET password = ?, equipo_favorito = ? WHERE usuario = ?");
         $stmt->bind_param("sss", $pass, $equipo, $user);
 
         if ($stmt->execute()) {
+            $stmt->close();
+
+            // Consultar el estadio correspondiente al nuevo equipo favorito
+            $stmtEst = $conexion->prepare("SELECT link_img, mapa FROM estadio_equipos WHERE nombre_equipo = ? LIMIT 1");
+            $stmtEst->bind_param("s", $equipo);
+            $stmtEst->execute();
+            $resEst = $stmtEst->get_result();
+            $estadioData = $resEst->fetch_assoc();
+            $stmtEst->close();
+
             echo json_encode([
                 "mensaje" => "Datos actualizados correctamente",
                 "usuario" => $user,
                 "password" => $pass,
-                "equipo_favorito" => $equipo
+                "equipo_favorito" => $equipo,
+                "link_img" => $estadioData['link_img'] ?? null,
+                "mapa" => $estadioData['mapa'] ?? null
             ]);
         } else {
             http_response_code(500);
             echo json_encode(["error" => "Error al actualizar los datos en MySQL"]);
+            $stmt->close();
         }
-        $stmt->close();
     } else {
         http_response_code(400);
         echo json_encode(["error" => "Acción no válida"]);

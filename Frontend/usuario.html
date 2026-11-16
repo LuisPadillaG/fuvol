@@ -26,6 +26,7 @@
             overflow-x: hidden;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
+            transition: background-image 0.5s ease-in-out;
         }
 
         body::before {
@@ -34,8 +35,8 @@
             inset: 0;
             z-index: -1;
             background:
-                radial-gradient(circle at 18% 45%, rgba(18, 56, 84, 0.42) 0%, rgba(8, 13, 19, 0.90) 52%, rgba(4, 5, 8, 0.98) 100%),
-                linear-gradient(90deg, rgba(8, 20, 30, 0.60) 0%, rgba(6, 9, 13, 0.92) 45%, rgba(4, 4, 6, 0.98) 100%);
+                radial-gradient(circle at 18% 45%, rgba(18, 56, 84, 0.45) 0%, rgba(8, 13, 19, 0.86) 55%, rgba(4, 5, 8, 0.95) 100%),
+                linear-gradient(90deg, rgba(8, 20, 30, 0.62) 0%, rgba(6, 9, 13, 0.88) 48%, rgba(4, 4, 6, 0.94) 100%);
             pointer-events: none;
         }
 
@@ -129,7 +130,7 @@
 
         .profile-panel {
             flex: 1;
-            padding: 48px 42px;
+            padding: 36px 42px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -138,11 +139,11 @@
 
         .profile-heading {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.3rem;
+            font-size: 3.1rem;
             font-weight: 400;
             letter-spacing: 0.03em;
             color: #ffffff;
-            margin-bottom: 22px;
+            margin-bottom: 16px;
             text-align: center;
             opacity: 0;
             animation: fadeInDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -152,12 +153,13 @@
             position: relative;
             width: 100%;
             max-width: 580px;
-            background-color: rgba(14, 14, 16, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: rgba(14, 14, 16, 0.90);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             border-radius: 6px;
-            padding: 34px 40px;
+            padding: 28px 36px;
             overflow: hidden;
             box-shadow: 0 20px 48px rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(6px);
             opacity: 0;
             animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
         }
@@ -182,7 +184,7 @@
             z-index: 2;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
         .user-badge-banner {
@@ -191,12 +193,12 @@
             justify-content: space-between;
             background: rgba(255, 255, 255, 0.04);
             border-left: 4px solid #17d875;
-            padding: 12px 18px;
+            padding: 10px 16px;
             border-radius: 4px;
         }
 
         .user-badge-label {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: #9ca3af;
@@ -204,7 +206,7 @@
 
         .user-badge-name {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
+            font-size: 1.9rem;
             color: #ffffff;
             letter-spacing: 0.03em;
             line-height: 1;
@@ -213,12 +215,12 @@
         .field-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .field-label {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.28rem;
             letter-spacing: 0.04em;
             color: #e5e7eb;
         }
@@ -231,7 +233,7 @@
 
         .field-input {
             width: 100%;
-            height: 48px;
+            height: 44px;
             padding: 0 95px 0 16px;
             border-radius: 5px;
             border: 1px solid rgba(255, 255, 255, 0.14);
@@ -252,14 +254,14 @@
         .toggle-pass-btn {
             position: absolute;
             right: 10px;
-            height: 32px;
+            height: 30px;
             padding: 0 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.08);
             color: #e5e7eb;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             letter-spacing: 0.04em;
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -273,11 +275,11 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 6px;
-            padding: 18px 20px;
+            padding: 14px 18px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             position: relative;
         }
 
@@ -289,8 +291,8 @@
         }
 
         .carousel-arrow-btn {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.18);
             background: rgba(255, 255, 255, 0.06);
@@ -319,13 +321,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            min-height: 138px;
+            gap: 8px;
+            min-height: 118px;
         }
 
         .carousel-team-logo {
-            width: 96px;
-            height: 96px;
+            width: 82px;
+            height: 82px;
             object-fit: contain;
             filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
             transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
@@ -338,7 +340,7 @@
 
         .carousel-team-name {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.75rem;
+            font-size: 1.65rem;
             letter-spacing: 0.03em;
             color: #ffffff;
             line-height: 1;
@@ -350,8 +352,8 @@
         }
 
         .carousel-dot {
-            width: 9px;
-            height: 9px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.22);
             cursor: pointer;
@@ -363,15 +365,36 @@
             transform: scale(1.25);
         }
 
+        /* =========================================================
+           RECUADRO COMPACTO PARA EL MAPA DEL ESTADIO (estadio_equipos.mapa)
+           ========================================================= */
+        .stadium-map-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .stadium-map-iframe {
+            width: 100%;
+            height: 135px;
+            border: 0;
+            border-radius: 4px;
+            background-color: #11161d;
+        }
+
         .submit-btn {
-            margin-top: 6px;
-            height: 52px;
+            margin-top: 4px;
+            height: 48px;
             border: none;
             border-radius: 5px;
             background-color: #17d875;
             color: #07190e;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.65rem;
+            font-size: 1.6rem;
             letter-spacing: 0.05em;
             cursor: pointer;
             box-shadow: 0 8px 22px rgba(23, 216, 117, 0.3);
@@ -384,10 +407,10 @@
         }
 
         .status-msg {
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             font-weight: 600;
             text-align: center;
-            min-height: 20px;
+            min-height: 18px;
             color: #ff6e59;
         }
 
@@ -484,6 +507,21 @@
                         </div>
                     </div>
 
+                    <!-- Mapa pequeño del estadio del equipo favorito (campo `mapa` de `estadio_equipos`) -->
+                    <div class="field-group">
+                        <label class="field-label">UBICACIÓN DEL ESTADIO</label>
+                        <div class="stadium-map-box">
+                            <iframe
+                                id="stadiumMapIframe"
+                                class="stadium-map-iframe"
+                                src=""
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+
                     <div id="statusMessage" class="status-msg"></div>
 
                     <button type="submit" class="submit-btn">GUARDAR CAMBIOS</button>
@@ -495,27 +533,66 @@
     <script>
         const PHP_ENDPOINT = 'usuarios.php';
 
-        // 3 Equipos hardcodeados con su logo oficial para el carrusel
-        const EQUIPOS_CARRUSEL = [
+        // 3 Equipos base con sus logos oficiales; se enriquecen con `link_img` y `mapa` desde `estadio_equipos`
+        let EQUIPOS_CARRUSEL = [
             {
                 nombre: 'Real Madrid CF',
-                logo: 'https://media.api-sports.io/football/teams/541.png'
+                logo: 'https://media.api-sports.io/football/teams/541.png',
+                link_img: '',
+                //mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.004440915295!2d-3.690522384602975!3d40.45303867936091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228e23705d39f%3A0xa8fff6d26e2b1988!2sEstadio%20Santiago%20Bernab%C3%A9u!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx'
             },
             {
                 nombre: 'FC Barcelona',
-                logo: 'https://media.api-sports.io/football/teams/529.png'
+                logo: 'https://media.api-sports.io/football/teams/529.png',
+                link_img: '',
+                //mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4573.494009633034!2d2.122972890589605!3d41.380431604540085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a498f576297baf%3A0x44f65330fe1b04b9!2sSpotify%20Camp%20Nou!5e0!3m2!1ses-419!2smx!4v1794795710693!5m2!1ses-419!2smx'
             },
             {
                 nombre: 'Club América',
-                logo: 'https://media.api-sports.io/football/teams/2287.png'
+                logo: 'https://media.api-sports.io/football/teams/2287.png',
+                link_img: '',
+                //mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.584397732028!2d-99.15288868509536!3d19.30286068695817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce005208010919%3A0x952f0c05948f6e86!2sEstadio%20Azteca!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx'
             }
         ];
 
         let currentTeamIndex = 0;
         let currentUsername = '';
 
+        /**
+         * Asigna el logo correcto de API-Football según el nombre_equipo guardado en `estadio_equipos`
+         */
+        function obtenerLogoPorNombre(nombreEquipo) {
+            const norm = String(nombreEquipo || '')
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
+
+            if (norm.includes('madrid')) return 'https://media.api-sports.io/football/teams/541.png';
+            if (norm.includes('barcelona') || norm.includes('barca')) return 'https://media.api-sports.io/football/teams/529.png';
+            if (norm.includes('america')) return 'https://media.api-sports.io/football/teams/2287.png';
+            return 'https://media.api-sports.io/football/leagues/140.png';
+        }
+
+        /**
+         * Aplica el `link_img` en el background del body y el `mapa` en el src del iframe
+         */
+        function aplicarEstadioEnPantalla(linkImg, mapaSrc) {
+            if (linkImg && String(linkImg).trim() !== '') {
+                document.body.style.backgroundImage = `url('${linkImg}'), url('../img/fuvol.jpg')`;
+            }
+
+            const iframeEl = document.getElementById('stadiumMapIframe');
+            if (iframeEl && mapaSrc && String(mapaSrc).trim() !== '') {
+                if (iframeEl.src !== mapaSrc) {
+                    iframeEl.src = mapaSrc;
+                }
+            }
+        }
+
         function renderCarousel() {
             const team = EQUIPOS_CARRUSEL[currentTeamIndex];
+            if (!team) return;
+
             const logoEl = document.getElementById('carouselTeamLogo');
             const nameEl = document.getElementById('carouselTeamName');
             const watermarkEl = document.getElementById('watermarkTeamImg');
@@ -528,6 +605,9 @@
                 watermarkEl.src = team.logo;
                 logoEl.classList.remove('pop-anim');
             }, 130);
+
+            // Actualizar el background (link_img) y el iframe (mapa) con los datos del equipo seleccionado
+            aplicarEstadioEnPantalla(team.link_img, team.mapa);
 
             dotsEl.innerHTML = EQUIPOS_CARRUSEL.map((_, idx) => `
                 <span class="carousel-dot ${idx === currentTeamIndex ? 'active' : ''}" onclick="selectTeamSlide(${idx})"></span>
@@ -557,6 +637,28 @@
             }
         }
 
+        /**
+         * Carga los registros de la tabla `estadio_equipos` para tener `nombre_equipo`, `link_img` y `mapa`
+         */
+        async function fetchEstadiosDeBaseDeDatos() {
+            try {
+                const res = await fetch(`${PHP_ENDPOINT}?accion=estadios`);
+                if (!res.ok) return;
+                const listaEstadios = await res.json();
+
+                if (Array.isArray(listaEstadios) && listaEstadios.length > 0) {
+                    EQUIPOS_CARRUSEL = listaEstadios.map(est => ({
+                        nombre: est.nombre_equipo,
+                        logo: obtenerLogoPorNombre(est.nombre_equipo),
+                        link_img: est.link_img || '',
+                        mapa: est.mapa || ''
+                    }));
+                }
+            } catch (e) {
+                console.warn('No se pudo cargar la lista completa de estadio_equipos:', e);
+            }
+        }
+
         async function loadUserProfile() {
             const rawSession = localStorage.getItem('fuvol_usuario_activo');
             if (!rawSession) {
@@ -567,7 +669,10 @@
             const sessionUser = JSON.parse(rawSession);
             currentUsername = sessionUser.usuario;
 
-            // Consultar datos actuales desde MySQL vía PHP
+            // 1. Cargar catálogo de `estadio_equipos` desde MySQL
+            await fetchEstadiosDeBaseDeDatos();
+
+            // 2. Consultar datos del usuario + JOIN con `estadio_equipos` desde MySQL
             try {
                 const res = await fetch(`${PHP_ENDPOINT}?accion=obtener&usuario=${encodeURIComponent(currentUsername)}`);
                 if (res.ok) {
@@ -586,10 +691,29 @@
             document.getElementById('displayUsuario').textContent = userObj.usuario;
             document.getElementById('inputPassword').value = userObj.password || '';
 
-            const foundIndex = EQUIPOS_CARRUSEL.findIndex(
-                t => t.nombre.toLowerCase() === String(userObj.equipo_favorito || '').toLowerCase()
+            const equipoUsuario = String(userObj.equipo_favorito || '').toLowerCase().trim();
+
+            let foundIndex = EQUIPOS_CARRUSEL.findIndex(
+                t => t.nombre.toLowerCase().trim() === equipoUsuario
             );
+
+            // Si el nombre guardado es parcial (ej. "Barcelona" vs "FC Barcelona"), emparejar flexiblemente
+            if (foundIndex === -1 && equipoUsuario) {
+                foundIndex = EQUIPOS_CARRUSEL.findIndex(
+                    t => t.nombre.toLowerCase().includes(equipoUsuario) || equipoUsuario.includes(t.nombre.toLowerCase())
+                );
+            }
+
             currentTeamIndex = foundIndex !== -1 ? foundIndex : 0;
+
+            // Si el JOIN directo de `usuarios.php?accion=obtener` devolvió `link_img` o `mapa`, asignarlos
+            if (userObj.link_img) {
+                EQUIPOS_CARRUSEL[currentTeamIndex].link_img = userObj.link_img;
+            }
+            if (userObj.mapa) {
+                EQUIPOS_CARRUSEL[currentTeamIndex].mapa = userObj.mapa;
+            }
+
             renderCarousel();
         }
 
@@ -620,11 +744,17 @@
                     const updatedUser = {
                         usuario: currentUsername,
                         password: nuevaPassword,
-                        equipo_favorito: nuevoEquipo
+                        equipo_favorito: nuevoEquipo,
+                        link_img: data.link_img || EQUIPOS_CARRUSEL[currentTeamIndex].link_img,
+                        mapa: data.mapa || EQUIPOS_CARRUSEL[currentTeamIndex].mapa
                     };
                     localStorage.setItem('fuvol_usuario_activo', JSON.stringify(updatedUser));
+
+                    // Aplicar de inmediato el fondo y mapa devueltos por la relación con `estadio_equipos`
+                    aplicarEstadioEnPantalla(updatedUser.link_img, updatedUser.mapa);
+
                     statusEl.className = 'status-msg success';
-                    statusEl.textContent = '¡Contraseña y equipo favorito actualizados!';
+                    statusEl.textContent = '¡Contraseña, equipo favorito y estadio actualizados!';
                 } else {
                     statusEl.textContent = data.error || 'Error al actualizar los datos.';
                 }

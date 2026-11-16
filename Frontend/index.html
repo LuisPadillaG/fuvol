@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUVOL - Partidos, Posiciones, Goleadores y Música</title>
-    <!-- Tipografías: Bebas Neue (Títulos condensados) e Inter (Datos de tablas) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* =========================================================
-           VARIABLES DINÁMICAS DE TEMA POR LIGA / VISTA
-           ========================================================= */
+        /*VARIABLES DINÁMICAS DE TEMA POR LIGA / VISTA */
         :root {
             --bg-fallback-color: #09131c;
             --bg-image-url: url('img/fondo2.jpg');
@@ -468,9 +465,6 @@
             text-align: center;
         }
 
-        /* =========================================================
-           LAYOUT PRINCIPAL (MENÚ IZQUIERDO + PANEL DERECHO)
-           ========================================================= */
         .app-layout {
             display: flex;
             flex-direction: row;
@@ -481,10 +475,6 @@
             position: relative;
             padding-bottom: 120px; /* Espacio para que el minireproductor no tape contenido */
         }
-
-        /* =========================================================
-           COLUMNA IZQUIERDA: MENÚ DINÁMICO CON ANIMACIONES
-           ========================================================= */
         .sidebar-menu {
             width: 350px;
             min-height: 100vh;
@@ -580,10 +570,6 @@
         .giant-menu-title:hover {
             transform: scale(1.02) translateX(4px);
         }
-
-        /* =========================================================
-           VISTA 1: FUVOL (PARTIDOS HOY)
-           ========================================================= */
         .view-section {
             flex: 1;
             width: 100%;
@@ -620,8 +606,6 @@
             flex-direction: column;
             gap: 24px;
         }
-
-        /* Tarjeta de cada Liga en PARTIDOS HOY */
         .league-matches-card {
             position: relative;
             background-color: rgba(14, 14, 16, 0.92);
@@ -632,8 +616,6 @@
             opacity: 0;
             animation: fadeSlideUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
-        /* Marcas de agua izquierda y derecha con el logo de la liga */
         .league-watermark-left,
         .league-watermark-right {
             position: absolute;
@@ -816,8 +798,6 @@
             text-align: left;
             padding-left: 6px;
         }
-
-        /* Lista de filas con Scrollbar en Y cómodo para Champions League (36 equipos) y demás ligas */
         .standings-rows-list {
             display: flex;
             flex-direction: column;
@@ -856,8 +836,6 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-
-        /* IMPORTANTE: flex-shrink: 0 evita que las 36 filas de Champions se aplasten */
         .standing-row-card {
             position: relative;
             display: grid;
@@ -995,10 +973,6 @@
             background-color: #d93829;
             opacity: 0.92;
         }
-
-        /* =========================================================
-           COLUMNA DERECHA: GOLEADORES + SHOWCASE HOVER
-           ========================================================= */
         .scorers-header-bar {
             display: flex;
             align-items: center;
@@ -1081,8 +1055,6 @@
             font-weight: 800;
             color: #181818;
         }
-
-        /* Recuadro inferior bajo Goleadores (Logo Liga / Hover Jugador) */
         .player-showcase-wrapper {
             position: relative;
             margin-top: 14px;
@@ -1172,11 +1144,6 @@
             filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.52));
             pointer-events: none;
         }
-
-        /* =========================================================
-           MINIREPRODUCTOR DE MÚSICA (ESQUINA INFERIOR DERECHA)
-           Conectado a http://localhost:3000
-           ========================================================= */
         .mini-music-player {
             position: fixed;
             bottom: 0;
@@ -1320,10 +1287,6 @@
         .player-ctrl-btn.mute-active {
             color: #ff5247;
         }
-
-        /* =========================================================
-           ANIMACIONES KEYFRAMES
-           ========================================================= */
         @keyframes fadeSlideUp {
             0% {
                 opacity: 0;
@@ -1356,10 +1319,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* =========================================================
-           DISEÑO RESPONSIVO
-           ========================================================= */
         @media (max-width: 1260px) {
             .league-stats-panel {
                 grid-template-columns: 1fr;
@@ -1425,9 +1384,6 @@
 </head>
 <body data-theme="fuvol">
 
-    <!-- ==========================================
-         MENÚ DE HAMBURGUESA SUPERIOR DERECHO
-         ========================================== -->
     <div id="topHamburgerContainer" class="top-hamburger-container">
         <button type="button" class="hamburger-trigger-btn" onclick="toggleHamburgerMenu(event)" aria-label="Abrir menú de usuario">
             <span class="hamburger-trigger-label">MENÚ</span>
@@ -1439,7 +1395,6 @@
         </button>
 
         <nav class="hamburger-dropdown" onclick="event.stopPropagation()">
-            <!-- 1. Tu cuenta actual: si hay sesión abierta lleva a usuario.html, si no a iniciar_sesion.html -->
             <button type="button" class="hamburger-item" onclick="irATuCuentaActual()">
                 <span>TU CUENTA ACTUAL</span>
                 <span id="hamburgerAccountBadge" class="account-status-pill">SIN SESIÓN</span>
@@ -1447,34 +1402,26 @@
 
             <div class="hamburger-divider"></div>
 
-            <!-- 2. Iniciar nueva sesión -->
             <a href="iniciar_sesion.html" class="hamburger-item">
                 <span>INICIAR NUEVA SESIÓN</span>
             </a>
 
-            <!-- 3. Crear nuevo usuario -->
             <a href="nuevo_usuario.html" class="hamburger-item">
                 <span>CREAR NUEVO USUARIO</span>
             </a>
 
             <div class="hamburger-divider"></div>
 
-            <!-- 4. Ficha de identificación (abre el pop-up) -->
             <button type="button" class="hamburger-item" onclick="openIdCardModal()">
                 <span>FICHA DE IDENTIFICACIÓN</span>
             </button>
         </nav>
     </div>
-
-    <!-- ==========================================
-         POP-UP MODAL: FICHA DE IDENTIFICACIÓN
-         ========================================== -->
     <div id="idCardModalOverlay" class="id-modal-overlay" onclick="closeIdCardModal(event)">
         <div class="id-modal-window" onclick="event.stopPropagation()">
             <button type="button" class="id-modal-close-btn" onclick="closeIdCardModal()" title="Cerrar">&times;</button>
 
             <div class="id-cards-grid">
-                <!-- Recuadro 1: proyecto servidor remoto -->
                 <div class="id-card-column">
                     <h3 class="id-card-top-caption">proyecto servidor remoto</h3>
                     <div class="uacj-id-box">
@@ -1493,8 +1440,6 @@
                         <div class="uacj-cycle-footer">NOVIEMBRE 2026</div>
                     </div>
                 </div>
-
-                <!-- Recuadro 2: proyecto en GitHub -->
                 <div class="id-card-column">
                     <h3 class="id-card-top-caption">proyecto en GitHub</h3>
                     <div class="uacj-id-box">
@@ -1516,35 +1461,21 @@
             </div>
         </div>
     </div>
-
-    <!-- Marca de agua gigante de la liga activa en el fondo izquierdo -->
     <img id="sidebarWatermarkImg" src="https://media.api-sports.io/football/leagues/140.png" alt="" class="sidebar-watermark" onerror="this.style.display='none'">
 
     <div class="app-layout">
 
-        <!-- ==========================================
-             MENÚ LATERAL IZQUIERDO DINÁMICO
-             ========================================== -->
         <aside id="sidebarMenu" class="sidebar-menu">
             <!-- Se renderiza dinámicamente según la vista activa respetando el orden de cada captura -->
         </aside>
 
-        <!-- ==========================================
-             VISTA PRINCIPAL 1: FUVOL (PARTIDOS HOY)
-             ========================================== -->
         <main id="fuvolMatchesView" class="view-section fuvol-matches-panel">
             <h2 class="fuvol-main-heading">PARTIDOS HOY</h2>
             <div id="matchesLeaguesStack" class="matches-leagues-stack">
                 <div class="status-message-box">Consultando partidos del día en API-Football...</div>
             </div>
         </main>
-
-        <!-- ==========================================
-             VISTA 2: TABLA DE POSICIONES + GOLEADORES
-             (LALIGA, PREMIER LEAGUE, CHAMPIONS, LIGA MX)
-             ========================================== -->
         <main id="leagueStatsView" class="view-section league-stats-panel hidden-view">
-            <!-- Columna Central: Tabla de Posiciones con Scrollbar en Y -->
             <section class="league-column">
                 <h2 class="league-section-title">TABLA DE POSICIONES</h2>
                 <div class="glass-container-box">
@@ -1564,8 +1495,6 @@
                     </div>
                 </div>
             </section>
-
-            <!-- Columna Derecha: Top 5 Goleadores + Recuadro Hover -->
             <section class="league-column">
                 <h2 class="league-section-title">GOLEADORES</h2>
                 <div class="glass-container-box">
@@ -1577,10 +1506,6 @@
                         <div class="status-message-box">Cargando goleadores...</div>
                     </div>
                 </div>
-
-                <!-- Recuadro inferior:
-                     - Fuera de hover: logo de la competición activa
-                     - En hover sobre goleador: escudo del club + foto del jugador -->
                 <div id="playerShowcaseWrapper" class="player-showcase-wrapper">
                     <div class="player-showcase-card">
                         <div class="showcase-default-league">
@@ -1598,10 +1523,8 @@
 
     </div>
 
-    <!-- ==========================================
-         MINIREPRODUCTOR DE MÚSICA (ESQUINA INFERIOR DERECHA)
-         Conectado a http://localhost:3000
-         ========================================== -->
+    <!-- ========================================MINIREPRODUCTOR DE MÚSICA (ESQUINA INFERIOR DERECHA)
+         Conectado a http://localhost:3000 ========================================== -->
     <div id="miniMusicPlayer" class="mini-music-player is-paused">
         <div class="mini-player-cover-wrap" onclick="togglePlayPauseMusic()" title="Reproducir / Pausar">
             <img id="musicCoverImg" src="https://i1.sndcdn.com/artworks-000083458178-sk70h2-t500x500.jpg" alt="Portada" class="mini-player-cover">
@@ -1619,21 +1542,16 @@
                 <div id="musicArtistText" class="mini-player-artist">CONECTANDO LOCALHOST:3000</div>
 
                 <div class="mini-player-controls">
-                    <!-- Botón extra para silenciar / activar sonido -->
                     <button type="button" id="muteMusicBtn" class="player-ctrl-btn" onclick="toggleMuteMusic()" title="Silenciar / Activar audio">
                         <svg id="muteIconSvg" viewBox="0 0 24 24">
                             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                         </svg>
                     </button>
-
-                    <!-- Botón Canción Anterior -->
                     <button type="button" class="player-ctrl-btn" onclick="prevTrackMusic()" title="Canción anterior">
                         <svg viewBox="0 0 24 24">
                             <path d="M20 5L5 12l15 7-4-7 4-7z"/>
                         </svg>
                     </button>
-
-                    <!-- Botón Siguiente Canción -->
                     <button type="button" class="player-ctrl-btn" onclick="nextTrackMusic()" title="Siguiente canción">
                         <svg viewBox="0 0 24 24">
                             <path d="M4 5l15 7-15 7 4-7-4-7z"/>
@@ -1646,24 +1564,20 @@
         <audio id="fuvolAudioElement" preload="metadata"></audio>
     </div>
 
-    <!-- ==========================================
+    <!-- 
          LÓGICA JAVASCRIPT PURO (3 APIS + CACHÉ EN MEMORIA)
          1. API-Football (Partidos hoy, escudos, goleadores y foto jugador)
          2. ESPN API (Tablas de posiciones temporada actual)
-         3. Localhost Node API http://localhost:3000 (Reproductor de música)
-         ========================================== -->
+         3. Localhost Node API http://localhost:3000 (Reproductor de música) -->
     <script>
         const API_CONFIG = {
             FOOTBALL_API_KEY: '938bdb85c5bc8c72dd8a9d300c931c21',
             FOOTBALL_BASE_URL: 'https://v3.football.api-sports.io',
             FREE_TIER_MAX_SEASON: 2024,
-            LOCAL_MUSIC_API: 'http://localhost:3000',
+            LOCAL_MUSIC_API: 'https://apifootball-2mn5.onrender.com',
             STORAGE_PREFIX: 'fuvol_spa_cache_v4_'
         };
 
-        /**
-         * Configuración de las 5 vistas y sus metadatos exactos según las capturas
-         */
         const VIEWS_META = {
             fuvol: {
                 key: 'fuvol',
@@ -1758,16 +1672,12 @@
             },
             playerPhotos: new Map(),
             activeHoverIndex: null,
-            // Estado del reproductor de música (localhost:3000)
             musicPlaylist: [],
             currentSongIndex: 0,
             isPlayingMusic: false,
             isMutedMusic: false
         };
 
-        // =========================================================================
-        // 0. LÓGICA DEL MENÚ DE HAMBURGUESA Y POP-UP DE IDENTIFICACIÓN
-        // =========================================================================
         function updateHamburgerSessionBadge() {
             const badgeEl = document.getElementById('hamburgerAccountBadge');
             if (!badgeEl) return;
@@ -1826,7 +1736,6 @@
             if (modal) modal.classList.remove('is-visible');
         }
 
-        // Cerrar menú hamburguesa al hacer clic fuera o presionar Escape
         document.addEventListener('click', function () {
             closeHamburgerMenu();
         });
@@ -1837,19 +1746,11 @@
                 closeIdCardModal();
             }
         });
-
-        // =========================================================================
-        // 1. NAVEGACIÓN Y RENDERIZADO DEL MENÚ LATERAL IZQUIERDO
-        // =========================================================================
         function switchView(viewKey) {
             if (!VIEWS_META[viewKey]) return;
             APP_MEMORY.currentView = viewKey;
             APP_MEMORY.activeHoverIndex = null;
-
-            // Cambiar tema en body
             document.body.setAttribute('data-theme', viewKey);
-
-            // Actualizar marca de agua izquierda
             const watermarkEl = document.getElementById('sidebarWatermarkImg');
             if (watermarkEl) {
                 if (viewKey === 'fuvol') {
@@ -1860,10 +1761,8 @@
                 }
             }
 
-            // Renderizar menú izquierdo con el orden correspondiente
             renderSidebarMenu(viewKey);
 
-            // Alternar paneles principales
             const fuvolView = document.getElementById('fuvolMatchesView');
             const leagueView = document.getElementById('leagueStatsView');
 
@@ -1875,7 +1774,6 @@
                 fuvolView.classList.add('hidden-view');
                 leagueView.classList.remove('hidden-view');
 
-                // Actualizar logo por defecto bajo la tabla de goleadores
                 const defaultLogoEl = document.getElementById('defaultLeagueLogo');
                 const wrapper = document.getElementById('playerShowcaseWrapper');
                 if (wrapper) wrapper.classList.remove('is-hovering-player');
@@ -1920,10 +1818,6 @@
                 </div>
             `;
         }
-
-        // =========================================================================
-        // 2. VISTA FUVOL: PARTIDOS HOY (1 SOLA PETICIÓN INICIAL Y CACHÉ EN MEMORIA)
-        // =========================================================================
         async function loadFuvolTodayMatches() {
             const stackEl = document.getElementById('matchesLeaguesStack');
             if (!stackEl) return;
@@ -1947,7 +1841,7 @@
             } catch (e) {}
 
             const todayIso = new Date().toISOString().split('T')[0];
-            const priorityIds = [39, 140, 2, 262]; // Premier, LaLiga, Champions, Liga MX
+            const priorityIds = [39, 140, 2, 262];
 
             try {
                 const res = await fetch(`${API_CONFIG.FOOTBALL_BASE_URL}/fixtures?date=${todayIso}`, {
@@ -1962,8 +1856,6 @@
                         fixtures = json.response;
                     }
                 }
-
-                // Si el plan gratuito de API-Football bloquea la fecha actual, consultar una fecha válida en 2024
                 if (fixtures.length === 0) {
                     const fallbackDateRes = await fetch(`${API_CONFIG.FOOTBALL_BASE_URL}/fixtures?date=2024-10-26`, {
                         method: 'GET',
@@ -1994,7 +1886,6 @@
                     }
                 });
 
-                // Priorizar las 4 ligas principales del menú y si no hay partidos de ellas, mostrar las más relevantes del día
                 let selectedGroups = [];
                 priorityIds.forEach(id => {
                     if (groupedMap.has(id)) selectedGroups.push(groupedMap.get(id));
@@ -2089,9 +1980,6 @@
             }).join('');
         }
 
-        // =========================================================================
-        // 3. VISTAS DE LIGAS: ESPN API (POSICIONES) + API-FOOTBALL (ESCUDOS/GOLEADORES)
-        // =========================================================================
         function normalizeKeyName(name) {
             return String(name || '')
                 .toLowerCase()
@@ -2110,7 +1998,6 @@
             const scorersEl = document.getElementById('leagueScorersList');
             const mem = APP_MEMORY.leaguesData[leagueKey];
 
-            // Si ya está en memoria RAM, renderizar al instante
             if (mem.standings && mem.scorers) {
                 renderLeagueStandings(mem.standings);
                 renderLeagueScorers(leagueKey, mem.scorers);
@@ -2140,7 +2027,6 @@
             if (standingsEl) standingsEl.innerHTML = `<div class="status-message-box">Consultando Tabla de Posiciones en vivo (ESPN API)...</div>`;
             if (scorersEl) scorersEl.innerHTML = `<div class="status-message-box">Consultando Goleadores (API-Football)...</div>`;
 
-            // Consultar catálogo de escudos + goleadores en API-Football y tabla en ESPN API
             await Promise.all([
                 fetchTeamsLogosForLeague(leagueKey, meta.leagueId),
                 fetchTopScorersForLeague(leagueKey, meta.leagueId, meta.logo)
@@ -2349,8 +2235,6 @@
                 listEl.innerHTML = `<div class="status-message-box">Sin datos disponibles en la tabla de posiciones.</div>`;
                 return;
             }
-
-            // Resetear scroll al tope al cambiar de liga
             listEl.scrollTop = 0;
 
             listEl.innerHTML = standings.map((row, index) => {
@@ -2440,9 +2324,6 @@
             }).join('');
         }
 
-        // =========================================================================
-        // 4. HOVER EN GOLEADORES (PETICIÓN EXTRA DE JUGADOR A API-FOOTBALL)
-        // =========================================================================
         async function handleScorerHoverEnter(leagueKey, index) {
             APP_MEMORY.activeHoverIndex = index;
 
@@ -2514,13 +2395,9 @@
             return fallbackResult;
         }
 
-        // =========================================================================
-        // 5. CONEXIÓN A LA API EN LOCALHOST:3000 (MINIREPRODUCTOR DE MÚSICA)
-        // =========================================================================
         async function initLocalhostMusicApi() {
             const audioEl = document.getElementById('fuvolAudioElement');
             if (audioEl) {
-                // Pasar automáticamente a la siguiente canción cuando termine la actual
                 audioEl.addEventListener('ended', () => {
                     nextTrackMusic(true);
                 });
@@ -2535,7 +2412,6 @@
             }
 
             try {
-                // 1. Consultar http://localhost:3000/musica para obtener todas las canciones ordenadas por ID
                 const response = await fetch(`${API_CONFIG.LOCAL_MUSIC_API}/musica`);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
@@ -2550,7 +2426,6 @@
                 console.warn('No se pudo conectar directamente con /musica en localhost:3000, intentando ruta raíz / y /musica/:id...', err);
             }
 
-            // 2. Segundo intento usando GET / (cantidad_de_canciones) y GET /musica/:id
             try {
                 const countRes = await fetch(`${API_CONFIG.LOCAL_MUSIC_API}/`);
                 if (countRes.ok) {
@@ -2576,8 +2451,6 @@
             } catch (err2) {
                 console.warn('Servidor localhost:3000 apagado o inaccesible. Cargando canción de respaldo FIFA 14.', err2);
             }
-
-            // 3. Respaldo por si el servidor Node en localhost:3000 aún no se ha encendido
             APP_MEMORY.musicPlaylist = [
                 {
                     id: 1,
@@ -2603,7 +2476,6 @@
             const audioEl = document.getElementById('fuvolAudioElement');
 
             const nombreCancion = song.nombre || 'SIN TÍTULO';
-            // Soporta tanto "arista_principal" (como viene en tu JSON) como "artista_principal"
             const artistaPrincipal = song.arista_principal || song.artista_principal || 'ARTISTA';
             const portadaUrl = song.portada || 'https://i1.sndcdn.com/artworks-000083458178-sk70h2-t500x500.jpg';
             const audioUrl = song.enlace_cancion || '';
@@ -2696,9 +2568,6 @@
                 .replace(/'/g, '&#039;');
         }
 
-        // =========================================================================
-        // INICIALIZACIÓN AL CARGAR LA PÁGINA
-        // =========================================================================
         window.onload = function () {
             updateHamburgerSessionBadge();
             switchView('fuvol');
